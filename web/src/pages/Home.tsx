@@ -1,9 +1,9 @@
+import { useTypedQuery } from '@tutorial-sst/graphql/urql'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { useTypedQuery } from '@tutorial-sst/graphql/urql'
 import Empty from '../components/Empty'
-import Navbar from '../components/Navbar'
 import Loading from '../components/Loading'
+import Navbar from '../components/Navbar'
 import * as styles from './Home.css'
 
 export default function Home() {
@@ -34,8 +34,7 @@ export default function Home() {
                 <h2 className={styles.title}>
                   <Link to={`/article/${article.id}`}>{article.title}</Link>
                 </h2>
-                &nbsp;
-                <a target='_blank' href={article.url} className={styles.url}>
+                <a target='_blank' href={article.url} className={styles.url} rel='noreferrer'>
                   ({article.url.replace(/(^\w+:|^)\/\//, '')})
                 </a>
               </div>

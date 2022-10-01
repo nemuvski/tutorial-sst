@@ -1,8 +1,8 @@
-export * as Dynamo from './dynamo'
-
-import { EntityConfiguration } from 'electrodb'
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
-import { Config } from '@serverless-stack/node/config'
+import { EntityConfiguration } from 'electrodb'
+import { Config } from '../libs/serverless-stack-config'
+
+export * as Dynamo from './dynamo'
 
 export const Client = new DynamoDBClient({})
 

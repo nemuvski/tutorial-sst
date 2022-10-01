@@ -1,8 +1,8 @@
-import React from 'react'
 import { CgSpinner } from 'react-icons/cg'
 import * as styles from './Button.css'
+import type { ButtonHTMLAttributes } from 'react'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean
   variant?: keyof typeof styles.button
 }
@@ -18,7 +18,7 @@ export default function Button({
   const baseClassName = styles.button[variant]
 
   return (
-    <button type={type} className={`${baseClassName} ${className}`}>
+    <button type={type} className={`${baseClassName} ${className}`} {...props}>
       {loading && <CgSpinner className={styles.spinner} />}
       {children}
     </button>

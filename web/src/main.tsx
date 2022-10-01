@@ -1,22 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Provider as UrqlProvider, createClient } from 'urql'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Home from './pages/Home'
+import { Provider as UrqlProvider, createClient } from 'urql'
 import Article from './pages/Article'
+import Home from './pages/Home'
+
+// グローバルスタイル
 import './index.css'
 
 const urql = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
 })
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <UrqlProvider value={urql}>
-      <App />
-    </UrqlProvider>
-  </React.StrictMode>
-)
 
 function App() {
   return (
@@ -29,3 +23,14 @@ function App() {
     </BrowserRouter>
   )
 }
+
+const root = document.getElementById('root')
+if (!root) throw new Error('Oops, root element is missing.')
+
+ReactDOM.createRoot(root).render(
+  <React.StrictMode>
+    <UrqlProvider value={urql}>
+      <App />
+    </UrqlProvider>
+  </React.StrictMode>
+)

@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom'
 import { useTypedMutation } from '@tutorial-sst/graphql/urql'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from './Button'
 import * as styles from './Navbar.css'
 
@@ -32,10 +32,10 @@ export default function Navbar() {
           e.preventDefault()
 
           const fd = new FormData(e.currentTarget)
-          const url = fd.get('url')!.toString()
-          const title = fd.get('title')!.toString()
+          const url = fd.get('url')?.toString()
+          const title = fd.get('title')?.toString()
 
-          if (url.length > 0 && title.length > 0) {
+          if (url && title) {
             e.currentTarget.reset()
             const result = await createArticle({
               url,

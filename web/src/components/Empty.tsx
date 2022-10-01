@@ -1,7 +1,8 @@
 import * as styles from './Empty.css'
+import type { ReactNode } from 'react'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default function Empty(props: Props) {

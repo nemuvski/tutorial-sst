@@ -1,17 +1,15 @@
+import { useEffect, useState, useCallback, useRef } from 'react'
 import {
   useQuery,
   useClient,
-  createClient,
   createRequest,
   RequestPolicy,
   OperationResult,
   UseMutationState,
   OperationContext,
-  defaultExchanges,
   UseMutationResponse,
 } from 'urql'
-
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { pipe, toPromise } from 'wonka'
 import {
   QueryResult,
   QueryRequest,
@@ -20,8 +18,6 @@ import {
   generateQueryOp,
   generateMutationOp,
 } from './genql'
-
-import { pipe, toPromise } from 'wonka'
 
 export function useTypedQuery<Query extends QueryRequest>(opts: {
   query: Query
@@ -77,6 +73,7 @@ export function useTypedMutation<
         return result
       })
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state, setState]
   )
 

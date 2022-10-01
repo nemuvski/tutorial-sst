@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom'
 import { useTypedQuery } from '@tutorial-sst/graphql/urql'
+import { useParams } from 'react-router-dom'
 import Empty from '../components/Empty'
-import Navbar from '../components/Navbar'
 import Loading from '../components/Loading'
+import Navbar from '../components/Navbar'
 import * as styles from './Article.css'
 
 export default function Article() {
@@ -30,7 +30,7 @@ export default function Article() {
         <div className={styles.article}>
           <h1>{article.data.article.title}</h1>
           <p>
-            <a target='_blank' href={article.data.article.url}>
+            <a target='_blank' href={article.data.article.url} rel='noreferrer'>
               {article.data.article.url}
             </a>
           </p>
