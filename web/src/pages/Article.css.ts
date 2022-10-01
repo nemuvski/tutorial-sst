@@ -1,5 +1,5 @@
-import { style } from "@vanilla-extract/css";
+import { style } from '@vanilla-extract/css'
 
 export const article = style({
-  padding: "1rem",
-});
+  padding: '1rem',
+})

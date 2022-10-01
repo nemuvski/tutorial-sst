@@ -1,6 +1,6 @@
-import SchemaBuilder from "@pothos/core";
+import SchemaBuilder from '@pothos/core'
 
-export const builder = new SchemaBuilder({});
+export const builder = new SchemaBuilder({})
 
-builder.queryType({});
-builder.mutationType({});
+builder.queryType({})
+builder.mutationType({})

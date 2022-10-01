@@ -1,15 +1,13 @@
-import { Article } from "@tutorial-sst/core/article";
-import { builder } from "../builder";
+import { Article } from '@tutorial-sst/core/article'
+import { builder } from '../builder'
 
-const ArticleType = builder
-  .objectRef<Article.ArticleEntityType>("Article")
-  .implement({
-    fields: (t) => ({
-      id: t.exposeID("articleID"),
-      url: t.exposeString("url"),
-      title: t.exposeString("title"),
-    }),
-  });
+const ArticleType = builder.objectRef<Article.ArticleEntityType>('Article').implement({
+  fields: (t) => ({
+    id: t.exposeID('articleID'),
+    url: t.exposeString('url'),
+    title: t.exposeString('title'),
+  }),
+})
 
 builder.queryFields((t) => ({
   article: t.field({
@@ -18,20 +16,20 @@ builder.queryFields((t) => ({
       articleID: t.arg.string({ required: true }),
     },
     resolve: async (_, args) => {
-      const result = await Article.get(args.articleID);
+      const result = await Article.get(args.articleID)
 
       if (!result) {
-        throw new Error("Article not found");
+        throw new Error('Article not found')
       }
 
-      return result;
+      return result
     },
   }),
   articles: t.field({
     type: [ArticleType],
     resolve: () => Article.list(),
   }),
-}));
+}))
 
 builder.mutationFields((t) => ({
   createArticle: t.field({
@@ -42,4 +40,4 @@ builder.mutationFields((t) => ({
     },
     resolve: (_, args) => Article.create(args.title, args.url),
   }),
-}));
+}))

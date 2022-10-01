@@ -1,12 +1,12 @@
-import { useParams } from "react-router-dom";
-import { useTypedQuery } from "@tutorial-sst/graphql/urql";
-import Empty from "../components/Empty";
-import Navbar from "../components/Navbar";
-import Loading from "../components/Loading";
-import * as styles from "./Article.css";
+import { useParams } from 'react-router-dom'
+import { useTypedQuery } from '@tutorial-sst/graphql/urql'
+import Empty from '../components/Empty'
+import Navbar from '../components/Navbar'
+import Loading from '../components/Loading'
+import * as styles from './Article.css'
 
 export default function Article() {
-  const { id = "" } = useParams();
+  const { id = '' } = useParams()
 
   const [article] = useTypedQuery({
     query: {
@@ -19,7 +19,7 @@ export default function Article() {
         },
       ],
     },
-  });
+  })
 
   return (
     <div>
@@ -30,7 +30,7 @@ export default function Article() {
         <div className={styles.article}>
           <h1>{article.data.article.title}</h1>
           <p>
-            <a target="_blank" href={article.data.article.url}>
+            <a target='_blank' href={article.data.article.url}>
               {article.data.article.url}
             </a>
           </p>
@@ -39,5 +39,5 @@ export default function Article() {
         <Empty>Not Found</Empty>
       )}
     </div>
-  );
+  )
 }

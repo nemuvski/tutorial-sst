@@ -1,15 +1,10 @@
-import {
-  StackContext,
-  use,
-  Api as ApiGateway,
-  Config,
-} from "@serverless-stack/resources";
-import { Database } from "./Database";
+import { StackContext, use, Api as ApiGateway, Config } from '@serverless-stack/resources'
+import { Database } from './Database'
 
 export function Api({ stack }: StackContext) {
-  const db = use(Database);
+  const db = use(Database)
 
-  const api = new ApiGateway(stack, "api", {
+  const api = new ApiGateway(stack, 'api', {
     defaults: {
       function: {
         permissions: [db.table],
@@ -17,27 +12,25 @@ export function Api({ stack }: StackContext) {
       },
     },
     routes: {
-      "POST /graphql": {
-        type: "pothos",
+      'POST /graphql': {
+        type: 'pothos',
         function: {
-          handler: "functions/graphql/graphql.handler",
+          handler: 'functions/graphql/graphql.handler',
         },
-        schema: "services/functions/graphql/schema.ts",
-        output: "graphql/schema.graphql",
-        commands: [
-          "npx genql --output ./graphql/genql --schema ./graphql/schema.graphql --esm",
-        ],
+        schema: 'services/functions/graphql/schema.ts',
+        output: 'graphql/schema.graphql',
+        commands: ['npx genql --output ./graphql/genql --schema ./graphql/schema.graphql --esm'],
       },
     },
-  });
+  })
 
-  new Config.Parameter(stack, "API_URL", {
+  new Config.Parameter(stack, 'API_URL', {
     value: api.url,
-  });
+  })
 
   stack.addOutputs({
     API: api.url,
-  });
+  })
 
-  return api;
+  return api
 }

@@ -9,9 +9,9 @@ import {
   OperationContext,
   defaultExchanges,
   UseMutationResponse,
-} from "urql";
+} from 'urql'
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef } from 'react'
 import {
   QueryResult,
   QueryRequest,
@@ -19,22 +19,22 @@ import {
   MutationRequest,
   generateQueryOp,
   generateMutationOp,
-} from "./genql";
+} from './genql'
 
-import { pipe, toPromise } from "wonka";
+import { pipe, toPromise } from 'wonka'
 
 export function useTypedQuery<Query extends QueryRequest>(opts: {
-  query: Query;
-  pause?: boolean;
-  requestPolicy?: RequestPolicy;
-  context?: Partial<OperationContext>;
+  query: Query
+  pause?: boolean
+  requestPolicy?: RequestPolicy
+  context?: Partial<OperationContext>
 }) {
-  const { query, variables } = generateQueryOp(opts.query);
+  const { query, variables } = generateQueryOp(opts.query)
   return useQuery<QueryResult<Query>>({
     ...opts,
     query,
     variables,
-  });
+  })
 }
 
 const initialState = {
@@ -44,34 +44,24 @@ const initialState = {
   error: undefined,
   operation: undefined,
   extensions: undefined,
-};
+}
 
 export function useTypedMutation<
   Variables extends Record<string, any>,
   Mutation extends MutationRequest,
   Data extends MutationResult<Mutation>
->(
-  builder: (vars: Variables) => Mutation,
-  opts?: Partial<OperationContext>
-): UseMutationResponse<Data, Variables> {
-  const client = useClient();
-  const isMounted = useRef(true);
-  const [state, setState] =
-    useState<UseMutationState<Data, Variables>>(initialState);
+>(builder: (vars: Variables) => Mutation, opts?: Partial<OperationContext>): UseMutationResponse<Data, Variables> {
+  const client = useClient()
+  const isMounted = useRef(true)
+  const [state, setState] = useState<UseMutationState<Data, Variables>>(initialState)
   const executeMutation = useCallback(
-    (
-      vars?: Variables,
-      context?: Partial<OperationContext>
-    ): Promise<OperationResult<Data, Variables>> => {
-      setState({ ...initialState, fetching: true });
-      const buildArgs = vars || ({} as Variables);
-      const built = builder(buildArgs);
-      const { query, variables } = generateMutationOp(built);
+    (vars?: Variables, context?: Partial<OperationContext>): Promise<OperationResult<Data, Variables>> => {
+      setState({ ...initialState, fetching: true })
+      const buildArgs = vars || ({} as Variables)
+      const built = builder(buildArgs)
+      const { query, variables } = generateMutationOp(built)
       return pipe(
-        client.executeMutation<Data, Variables>(
-          createRequest(query, variables as Variables),
-          { ...opts, ...context }
-        ),
+        client.executeMutation<Data, Variables>(createRequest(query, variables as Variables), { ...opts, ...context }),
         toPromise
       ).then((result: OperationResult<Data, Variables>) => {
         if (isMounted.current) {
@@ -82,20 +72,20 @@ export function useTypedMutation<
             error: result.error,
             extensions: result.extensions,
             operation: result.operation,
-          });
+          })
         }
-        return result;
-      });
+        return result
+      })
     },
     [state, setState]
-  );
+  )
 
   useEffect(() => {
-    isMounted.current = true;
+    isMounted.current = true
     return () => {
-      isMounted.current = false;
-    };
-  }, []);
+      isMounted.current = false
+    }
+  }, [])
 
-  return [state, executeMutation];
+  return [state, executeMutation]
 }
