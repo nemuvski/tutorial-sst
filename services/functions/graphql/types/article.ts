@@ -1,11 +1,23 @@
 import { Article } from '@tutorial-sst/core/article'
 import { builder } from '../builder'
 
+const CommentType = builder.objectRef<Article.CommentEntityType>('Comment').implement({
+  fields: (t) => ({
+    id: t.exposeID('commentID'),
+    text: t.exposeString('text'),
+    articleID: t.exposeString('articleID'),
+  }),
+})
+
 const ArticleType = builder.objectRef<Article.ArticleEntityType>('Article').implement({
   fields: (t) => ({
     id: t.exposeID('articleID'),
     url: t.exposeString('url'),
     title: t.exposeString('title'),
+    comments: t.field({
+      type: [CommentType],
+      resolve: (article) => Article.comments(article.articleID),
+    }),
   }),
 })
 
@@ -39,5 +51,13 @@ builder.mutationFields((t) => ({
       url: t.arg.string({ required: true }),
     },
     resolve: (_, args) => Article.create(args.title, args.url),
+  }),
+  addComment: t.field({
+    type: CommentType,
+    args: {
+      articleID: t.arg.string({ required: true }),
+      text: t.arg.string({ required: true }),
+    },
+    resolve: (_, args) => Article.addComment(args.articleID, args.text),
   }),
 }))
