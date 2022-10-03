@@ -6,9 +6,30 @@ type Article {
 
 type Mutation {
   createArticle(title: String!, url: String!): Article!
+  createProject(name: String!): Project!
+}
+
+type Project {
+  deleted: Boolean!
+  id: ID!
+  name: String!
+  tasks: [Task!]!
 }
 
 type Query {
   article(articleID: String!): Article!
   articles: [Article!]!
+  project(projectID: String!): Project!
+}
+
+type Task {
+  assignee: User!
+  id: ID!
+  name: String!
+}
+
+type User {
+  email: String!
+  id: ID!
+  name: String!
 }

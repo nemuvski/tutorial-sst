@@ -35,10 +35,37 @@ export default {
                     ]
                 }
             ],
+            "createProject": [
+                4,
+                {
+                    "name": [
+                        2,
+                        "String!"
+                    ]
+                }
+            ],
             "__typename": [
                 2
             ]
         },
+        "Project": {
+            "deleted": [
+                5
+            ],
+            "id": [
+                1
+            ],
+            "name": [
+                2
+            ],
+            "tasks": [
+                7
+            ],
+            "__typename": [
+                2
+            ]
+        },
+        "Boolean": {},
         "Query": {
             "article": [
                 0,
@@ -52,10 +79,46 @@ export default {
             "articles": [
                 0
             ],
+            "project": [
+                4,
+                {
+                    "projectID": [
+                        2,
+                        "String!"
+                    ]
+                }
+            ],
             "__typename": [
                 2
             ]
         },
-        "Boolean": {}
+        "Task": {
+            "assignee": [
+                8
+            ],
+            "id": [
+                1
+            ],
+            "name": [
+                2
+            ],
+            "__typename": [
+                2
+            ]
+        },
+        "User": {
+            "email": [
+                2
+            ],
+            "id": [
+                1
+            ],
+            "name": [
+                2
+            ],
+            "__typename": [
+                2
+            ]
+        }
     }
 }
