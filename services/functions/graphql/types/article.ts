@@ -5,7 +5,10 @@ const ArticleType = builder.objectRef<Article.ArticleEntityType>('Article').impl
   fields: (t) => ({
     id: t.exposeID('articleID'),
     url: t.exposeString('url'),
-    title: t.exposeString('title'),
+    title: t.field({
+      type: 'String',
+      resolve: (article) => `🔥 ${article.title}`,
+    }),
   }),
 })
 
