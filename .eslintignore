@@ -1,1 +1,4 @@
 graphql/genql/
+
+sst-env.d.ts
+vite-env.d.ts

@@ -1,3 +1,5 @@
 graphql/genql/
 
-web/src/vite-env.d.ts
+schema.graphql
+sst-env.d.ts
+vite-env.d.ts
