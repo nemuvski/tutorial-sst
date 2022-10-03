@@ -16,6 +16,9 @@ export default function Home() {
         id: true,
         url: true,
         title: true,
+        comments: {
+          id: true,
+        },
       },
     },
     context,
@@ -37,6 +40,12 @@ export default function Home() {
                 <a target='_blank' href={article.url} className={styles.url} rel='noreferrer'>
                   ({article.url.replace(/(^\w+:|^)\/\//, '')})
                 </a>
+              </div>
+              <div className={styles.footer}>
+                {/* @ts-ignore: never mind */}
+                <strong>{article.comments.length}</strong>
+                <span className={styles.footerSeparator}>&bull;</span>
+                <Link to={`/article/${article.id}`}>View Comments</Link>
               </div>
             </li>
           ))}
