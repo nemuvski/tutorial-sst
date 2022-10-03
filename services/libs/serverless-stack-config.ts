@@ -1,9 +1,10 @@
-import { Config as _Config, type ConfigType } from '@serverless-stack/node/config'
+import { Config as _Config } from '@serverless-stack/node/config'
+// '@serverless-stack/resources' からも取れるけども、どちらが正しい？
 
 /**
- * NOTE: 型補完を効かせるために、型を継承する形で定義する
+ * NOTE: stacks/Database.ts でのTABLE_NAMEに相当しているß？
  */
-interface ServerlessStackConfigType extends ConfigType {
+interface ServerlessStackConfigType {
   TABLE_NAME: string | undefined
   API_URL: string | undefined
 }
