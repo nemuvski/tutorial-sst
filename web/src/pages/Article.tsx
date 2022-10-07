@@ -1,5 +1,4 @@
 import { useTypedMutation, useTypedQuery } from '@tutorial-sst/graphql/urql'
-import { addComment } from '@tutorial-sst/services/core/article'
 import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import Button from '../components/Button'
